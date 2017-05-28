@@ -1,0 +1,10 @@
+.Task-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Task-status {
+    top: 50%
+}
+

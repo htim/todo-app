@@ -1,0 +1,9 @@
+.HomePage-header {
+    height: 50px;
+    margin: 5px auto;
+}
+
+.HomePage-title {
+    text-align: left;
+    font-size: 24px;
+}

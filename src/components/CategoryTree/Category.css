@@ -1,0 +1,14 @@
+.Category-child {
+    margin-left: 20px
+}
+
+.Category-child-hide {
+    display: none;
+}
+
+.Category-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 5px;
+}
