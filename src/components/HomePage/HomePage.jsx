@@ -8,17 +8,19 @@ import TaskList from "../TaskList/TaskList";
 export default class HomePage extends Component {
 
     constructor(props) {
-        super(props)
+        super(props);
     }
 
     generateTasks = () => {
-        const task1 = {id: 1, title: "Todo Item #1", isComplete:false};
-        const task2 = {id: 2, title: "Todo Item #2", isComplete:true};
+        const task1 = {id: 1, title: "Todo Item #1", isComplete: false};
+        const task2 = {id: 2, title: "Todo Item #2", isComplete: true};
         return [task1, task2]
     };
 
     addCategory = () => {
-        this.props.categoryActions.addCategory("title");
+        const title = this.categoryInput.value;
+        this.props.categoryActions.addCategory(title);
+        this.categoryInput.value = "";
     };
 
     render() {
@@ -52,7 +54,9 @@ export default class HomePage extends Component {
                             <Col md={4}>
                                 <FormGroup>
                                     <InputGroup>
-                                        <FormControl type="text" placeholder="category name"/>
+                                        <FormControl type="text" placeholder="category name" inputRef={ref => {
+                                            this.categoryInput = ref
+                                        }}/>
                                         <InputGroup.Addon>
                                             <Glyphicon glyph="plus" onClick={this.addCategory}/>
                                         </InputGroup.Addon>
@@ -72,7 +76,7 @@ export default class HomePage extends Component {
                         </Row>
                         <Row>
                             <Col md={4}>
-                                <CategoryTree categories={this.props.categories}/>
+                                <CategoryTree categories={this.props.categories} actions={this.props.categoryActions}/>
                             </Col>
                             <Col md={8}>
                                 <TaskList tasks={this.generateTasks()}/>

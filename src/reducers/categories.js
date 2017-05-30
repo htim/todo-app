@@ -1,4 +1,5 @@
-import {CATEGORY_ADD, CATEGORY_REMOVE, CATEGORY_UPDATE} from '../actions/categories'
+import {CATEGORY_ADD, CATEGORY_REMOVE} from '../actions/constants'
+import * as _ from "lodash";
 
 
 const getNextId = (categories) => {
@@ -21,7 +22,8 @@ const generateInitialState = () => {
 const createCategory = (id, title) => {
     return {
         id,
-        title
+        title,
+        parentId: 0
     }
 };
 
@@ -34,6 +36,12 @@ export const categories = (state = generateInitialState(), action) => {
                 category,
                 ...state
             ]
+        }
+        case CATEGORY_REMOVE: {
+            const id = action.id;
+            return _.filter(state, c => {
+                return c.id !== id
+            })
         }
         default:
             return state;

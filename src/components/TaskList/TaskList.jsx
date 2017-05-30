@@ -8,7 +8,7 @@ export default class TaskList extends Component {
         const {tasks} = this.props;
 
         const tasksComponents = tasks.map(t => {
-            return <Task title={t.title} isComplete={t.isComplete}/>
+            return <Task key={t.id} title={t.title} isComplete={t.isComplete}/>
         })
 
         return (

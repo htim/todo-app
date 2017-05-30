@@ -1,6 +1,6 @@
 import {connect} from "react-redux"
 import {HomePage} from "../../components/HomePage/index";
-import {categories} from "../../actions"
+import {categories} from "../../actions/index"
 import {bindActionCreators} from "redux";
 
 const mapStateToProps = (state) => {
@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        categoryActions: bindActionCreators(dispatch, categories)
+        categoryActions: bindActionCreators(categories, dispatch)
     }
 }
 

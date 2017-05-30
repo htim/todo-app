@@ -28,10 +28,11 @@ export default class CategoryTree extends Component {
     };
 
     renderCategories = () => {
-        const {categories} = this.props;
+        const {categories, actions} = this.props;
         const categoriesTree = this.buildTree(categories);
         return categoriesTree.map(c => {
-            return <Category id={c.id} title={c.title} children={c.childs}/>
+            return <Category key={c.id} id={c.id} title={c.title} children={c.childs}
+                             removeCategory={actions.removeCategory}/>
         });
     }
 
