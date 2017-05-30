@@ -2,27 +2,23 @@ import React, {Component} from "react";
 import {Col, Row, Grid, FormControl, FormGroup, InputGroup, Glyphicon, ProgressBar, Button} from "react-bootstrap";
 import {Link} from "react-router-dom"
 import "./HomePage.css"
-import Category from "../CategoryTree/Category";
 import CategoryTree from "../CategoryTree/CategoryTree";
 import TaskList from "../TaskList/TaskList";
 
 export default class HomePage extends Component {
 
-    generateCategories = () => {
-        const c1 = {id: 1, title: "title1"};
-        const c2 = {id: 2, title: "title2"};
-        const c1_1 = {id: 3, title: "title3"};
-        const c1_2 = {id: 4, title: "title4"};
-        const c1_1_1 = {id: 5, title: "title5"};
-        c1_1.childs = [c1_1_1];
-        c1.childs = [c1_1, c1_2];
-        return [c1, c2];
-    };
+    constructor(props) {
+        super(props)
+    }
 
     generateTasks = () => {
         const task1 = {id: 1, title: "Todo Item #1", isComplete:false};
         const task2 = {id: 2, title: "Todo Item #2", isComplete:true};
         return [task1, task2]
+    };
+
+    addCategory = () => {
+        this.props.categoryActions.addCategory("title");
     };
 
     render() {
@@ -58,7 +54,7 @@ export default class HomePage extends Component {
                                     <InputGroup>
                                         <FormControl type="text" placeholder="category name"/>
                                         <InputGroup.Addon>
-                                            <Glyphicon glyph="plus"/>
+                                            <Glyphicon glyph="plus" onClick={this.addCategory}/>
                                         </InputGroup.Addon>
                                     </InputGroup>
                                 </FormGroup>
@@ -76,7 +72,7 @@ export default class HomePage extends Component {
                         </Row>
                         <Row>
                             <Col md={4}>
-                                <CategoryTree categories={this.generateCategories()}/>
+                                <CategoryTree categories={this.props.categories}/>
                             </Col>
                             <Col md={8}>
                                 <TaskList tasks={this.generateTasks()}/>
