@@ -4,6 +4,7 @@ import {Link} from "react-router-dom"
 import "./HomePage.css"
 import CategoryTree from "../CategoryTree/CategoryTree";
 import TaskList from "../TaskList/TaskList";
+import ConnectedCategoryTree from "../../containers/ConnectedCategoryTree/ConnectedCategoryTree";
 
 export default class HomePage extends Component {
 
@@ -17,11 +18,6 @@ export default class HomePage extends Component {
         return [task1, task2]
     };
 
-    addCategory = () => {
-        const title = this.categoryInput.value;
-        this.props.categoryActions.addCategory(title);
-        this.categoryInput.value = "";
-    };
 
     render() {
         return (
@@ -52,16 +48,7 @@ export default class HomePage extends Component {
                         </Row>
                         <Row>
                             <Col md={4}>
-                                <FormGroup>
-                                    <InputGroup>
-                                        <FormControl type="text" placeholder="category name" inputRef={ref => {
-                                            this.categoryInput = ref
-                                        }}/>
-                                        <InputGroup.Addon>
-                                            <Glyphicon glyph="plus" onClick={this.addCategory}/>
-                                        </InputGroup.Addon>
-                                    </InputGroup>
-                                </FormGroup>
+                                <ConnectedCategoryTree/>
                             </Col>
                             <Col md={4} mdOffset={4}>
                                 <FormGroup>
@@ -72,14 +59,6 @@ export default class HomePage extends Component {
                                         </InputGroup.Addon>
                                     </InputGroup>
                                 </FormGroup>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={4}>
-                                <CategoryTree categories={this.props.categories} actions={this.props.categoryActions}/>
-                            </Col>
-                            <Col md={8}>
-                                <TaskList tasks={this.generateTasks()}/>
                             </Col>
                         </Row>
                     </Row>
