@@ -64,7 +64,7 @@ export default class CategoryTree extends Component {
 
     renderCategories = () => {
         const {categories, categoryActions} = this.props;
-        const tree = this.buildTree(categories);
+        const tree = this.buildTree(_.cloneDeep(categories));
         return tree.map(c => {
             return <Category key={c.id} id={c.id} title={c.title} children={c.childs}
                              removeCategory={categoryActions.removeCategory}
@@ -74,7 +74,7 @@ export default class CategoryTree extends Component {
 
     renderUpdatingModal = () => {
 
-        const category = _.first(_.filter(this.props.categories, x => x.id == this.state.updatingId));
+        const category = _.first(_.filter(this.props.categories, x => x.id === this.state.updatingId));
 
         return (
             <Modal show={this.state.showUpdatingModal} onHide={this.closeUpdatingModal}>
